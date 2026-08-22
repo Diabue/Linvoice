@@ -106,16 +106,6 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
             />
           </div>
 
-          <div className="form-group">
-            <label className="form-label">Numer do Płatności BLIK na miejscu</label>
-            <input
-              type="text"
-              className="form-input"
-              value={form.blikPhone}
-              onChange={(e) => setForm({ ...form, blikPhone: e.target.value })}
-            />
-          </div>
-
           <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '12px', border: '1px solid #e2e8f0', marginTop: '8px' }}>
             <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a' }}>Plan Subskrypcji</div>
             <div style={{ fontSize: '15px', fontWeight: 800, color: '#10b981', marginTop: '2px' }}>

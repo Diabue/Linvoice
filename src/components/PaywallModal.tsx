@@ -234,7 +234,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
                   <div style={{ background: '#ecfdf5', color: '#047857', padding: '4px', borderRadius: '50%' }}>
                     <Check size={16} />
                   </div>
-                  <span>Kody QR BLIK do natychmiastowych płatności na budowie</span>
+                  <span>Zarządzanie bazą klientów i szybkim cennikiem usług</span>
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14px', fontWeight: 600, color: '#0f172a' }}>
@@ -259,7 +259,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: '12px', color: '#94a3b8' }}>
                 <ShieldCheck size={16} color="#10b981" />
-                <span>Bezpieczna płatność BLIK / Karta Kredytowa</span>
+                <span>Bezpieczna płatność Karta Kredytowa / Przelew</span>
               </div>
             </>
           )}

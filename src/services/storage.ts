@@ -18,7 +18,6 @@ export const DEFAULT_PROFILE: UserCompanyProfile = {
   email: 'kontakt@instalacje-kowalski.pl',
   phone: '+48 600 100 200',
   bankAccount: 'PL 49 1020 2892 0000 4802 0111 9999',
-  blikPhone: '600100200',
   subscriptionPlan: 'Plan PRO (Okres testowy)',
   trialStartDate: new Date().toISOString(),
   isSubscribed: false,
@@ -176,8 +175,8 @@ export const INITIAL_INVOICES: Invoice[] = [
         vatRate: 23,
       },
     ],
-    paymentMethod: 'BLIK',
-    notes: 'Opłacono szybkim przelewem BLIK.',
+    paymentMethod: 'TRANSFER',
+    notes: 'Opłacono przelewem bankowym.',
     totalNet: 740.00,
     totalVat: 170.20,
     totalGross: 910.20,
@@ -203,7 +202,7 @@ export const INITIAL_INVOICES: Invoice[] = [
       },
     ],
     paymentMethod: 'CASH',
-    notes: 'Zaakceptowano telefonicznie. Termin realizacji: poniedziałek 08:00.',
+    notes: 'Zaakceptowano telefonicznie. Rozliczenie gotówkowe na miejscu.',
     totalNet: 650.00,
     totalVat: 149.50,
     totalGross: 799.50,
@@ -322,7 +321,7 @@ export const fetchGusData = async (nip: string): Promise<Partial<Client> | null>
       }
     }
   } catch (err) {
-    // Graceful fallback to mock DB if network / CORS restriction occurs
+    // Fallback to mock database if CORS or network error
   }
 
   // 2. Mock Database of known test NIPs

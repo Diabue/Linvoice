@@ -59,7 +59,7 @@ export const InvoiceBuilderModal: React.FC<InvoiceBuilderModalProps> = ({
   ]);
 
   // Step 3: Payment details
-  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('BLIK');
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('TRANSFER');
   const [notes, setNotes] = useState('Wycena obejmuje komplet materiałów oraz gwarancję na wykonane prace.');
 
   if (!isOpen) return null;
@@ -521,36 +521,15 @@ export const InvoiceBuilderModal: React.FC<InvoiceBuilderModalProps> = ({
 
               {/* Payment Method Selector */}
               <div className="form-group">
-                <label className="form-label">Sposób płatności na miejscu</label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                <label className="form-label">Sposób płatności</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
                   <button
                     type="button"
                     style={{
-                      padding: '12px',
+                      padding: '12px 6px',
                       borderRadius: '12px',
                       fontWeight: 700,
-                      fontSize: '13px',
-                      border: paymentMethod === 'BLIK' ? '2px solid #10b981' : '1px solid #e2e8f0',
-                      background: paymentMethod === 'BLIK' ? '#ecfdf5' : '#ffffff',
-                      color: paymentMethod === 'BLIK' ? '#047857' : '#475569',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '6px',
-                    }}
-                    onClick={() => setPaymentMethod('BLIK')}
-                  >
-                    <span>⚡ BLIK na telefon</span>
-                  </button>
-
-                  <button
-                    type="button"
-                    style={{
-                      padding: '12px',
-                      borderRadius: '12px',
-                      fontWeight: 700,
-                      fontSize: '13px',
+                      fontSize: '12px',
                       border: paymentMethod === 'TRANSFER' ? '2px solid #0f172a' : '1px solid #e2e8f0',
                       background: paymentMethod === 'TRANSFER' ? '#0f172a' : '#ffffff',
                       color: paymentMethod === 'TRANSFER' ? '#ffffff' : '#475569',
@@ -558,11 +537,53 @@ export const InvoiceBuilderModal: React.FC<InvoiceBuilderModalProps> = ({
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '6px',
+                      gap: '4px',
                     }}
                     onClick={() => setPaymentMethod('TRANSFER')}
                   >
-                    <span>🏦 Przelew bankowy</span>
+                    <span>🏦 Przelew</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    style={{
+                      padding: '12px 6px',
+                      borderRadius: '12px',
+                      fontWeight: 700,
+                      fontSize: '12px',
+                      border: paymentMethod === 'CASH' ? '2px solid #0f172a' : '1px solid #e2e8f0',
+                      background: paymentMethod === 'CASH' ? '#0f172a' : '#ffffff',
+                      color: paymentMethod === 'CASH' ? '#ffffff' : '#475569',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '4px',
+                    }}
+                    onClick={() => setPaymentMethod('CASH')}
+                  >
+                    <span>💵 Gotówka</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    style={{
+                      padding: '12px 6px',
+                      borderRadius: '12px',
+                      fontWeight: 700,
+                      fontSize: '12px',
+                      border: paymentMethod === 'CARD' ? '2px solid #0f172a' : '1px solid #e2e8f0',
+                      background: paymentMethod === 'CARD' ? '#0f172a' : '#ffffff',
+                      color: paymentMethod === 'CARD' ? '#ffffff' : '#475569',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '4px',
+                    }}
+                    onClick={() => setPaymentMethod('CARD')}
+                  >
+                    <span>💳 Karta</span>
                   </button>
                 </div>
               </div>

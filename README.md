@@ -31,7 +31,7 @@
 - ⚡ **Wystawianie wyceny/faktury w 30 sekund** — Błyskawiczny 3-krokowy wizard zaprojektowany pod chwyt jedną ręką na telefonie.
 - 🏢 **Automatyczne pobieranie z GUS / Ministerstwa Finansów** — Wpisz 10-cyfrowy NIP klienta, a system w 0.2s uzupełni nazwę, ulicę, miasto, kod pocztowy i e-mail.
 - 🛠️ **Szybki Katalog Usług & Cennik** — Liczniki `+` i `-` umożliwiają szybkie dodawanie gotowych pozycji (np. *Montaż punktu elektrycznego*, *Wymiana syfonu*) bezpośrednio u klienta.
-- 📱 **Szybkie płatności BLIK QR na miejscu** — Generowanie kodu QR i danych do szybkiego przelewu BLIK na budowie.
+- 💳 **Wygodne formy płatności** — Rozliczenie przelewem bankowym, gotówką lub kartą z danymi rachunku IBAN na fakturze.
 - 📄 **Generowanie PDF i wysyłka SMS / WhatsApp** — Profesjonalne faktury i wyceny w formacie PDF gotowe do udostępnienia jednym kliknięciem.
 - 🔒 **Subskrypcja PRO z 3-dniowym Trialem** — System darmowych testów, baner z odliczaniem czasu oraz wbudowany Paywall z możliwością płatności i anulowania subskrypcji.
 

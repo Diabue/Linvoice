@@ -2,7 +2,7 @@ export type InvoiceType = 'FAKTURA' | 'OFERTA';
 
 export type InvoiceStatus = 'PAID' | 'PENDING' | 'OVERDUE' | 'DRAFT' | 'ACCEPTED';
 
-export type PaymentMethod = 'TRANSFER' | 'BLIK' | 'CASH' | 'CARD';
+export type PaymentMethod = 'TRANSFER' | 'CASH' | 'CARD';
 
 export interface ServiceItem {
   id: string;
@@ -61,7 +61,6 @@ export interface UserCompanyProfile {
   email: string;
   phone: string;
   bankAccount: string;
-  blikPhone: string;
   logoUrl?: string;
   subscriptionPlan: string;
   trialStartDate: string;

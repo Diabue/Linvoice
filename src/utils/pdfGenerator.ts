@@ -107,11 +107,18 @@ export const generateInvoicePDF = (invoice: Invoice, seller: UserCompanyProfile)
   doc.setFontSize(9.5);
   
   // Meta keys table
+  const paymentLabel =
+    invoice.paymentMethod === 'TRANSFER'
+      ? 'Przelew bankowy'
+      : invoice.paymentMethod === 'CASH'
+      ? 'Gotówka na miejscu'
+      : 'Karta płatnicza';
+
   const metaItems = [
     { label: 'Numer dokumentu:', val: invoice.number },
     { label: 'Data wystawienia:', val: invoice.issueDate },
     { label: 'Termin płatności:', val: invoice.dueDate },
-    { label: 'Forma płatności:', val: invoice.paymentMethod === 'BLIK' ? 'Płatność BLIK' : 'Przelew bankowy' },
+    { label: 'Forma płatności:', val: paymentLabel },
   ];
 
   metaItems.forEach((item) => {
@@ -209,7 +216,7 @@ export const generateInvoicePDF = (invoice: Invoice, seller: UserCompanyProfile)
   doc.setLineWidth(1.0);
   doc.line(120, y, 195, y);
 
-  // 6. PAYMENT INSTRUCTIONS & FOOTER NOTE (Matching Payt footer)
+  // 6. PAYMENT INSTRUCTIONS & FOOTER NOTE
   y += 20;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9.5);
@@ -221,14 +228,16 @@ export const generateInvoicePDF = (invoice: Invoice, seller: UserCompanyProfile)
   doc.setFontSize(9);
   doc.setTextColor(textColorMuted[0], textColorMuted[1], textColorMuted[2]);
 
-  if (invoice.paymentMethod === 'BLIK' && seller.blikPhone) {
-    doc.text(`• Przelew na telefon BLIK: +48 ${seller.blikPhone}`, 15, y);
-    doc.text(`• Tytuł przelewu: ${invoice.number}`, 15, y + 5);
-    y += 12;
-  } else {
+  if (invoice.paymentMethod === 'TRANSFER') {
     doc.text(`• Przelew na konto IBAN: ${seller.bankAccount || 'Brak danych'}`, 15, y);
     doc.text(`• Tytuł przelewu: ${invoice.number}`, 15, y + 5);
     y += 12;
+  } else if (invoice.paymentMethod === 'CASH') {
+    doc.text('• Rozliczenie gotówkowe na miejscu u klienta.', 15, y);
+    y += 8;
+  } else {
+    doc.text('• Płatność kartą płatniczą.', 15, y);
+    y += 8;
   }
 
   if (invoice.notes) {

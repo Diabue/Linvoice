@@ -1,8 +1,8 @@
 import React from 'react';
 import {
   Download,
-  Smartphone,
   Send,
+  Building2,
 } from 'lucide-react';
 import type { Invoice, UserCompanyProfile } from '../types';
 import { generateInvoicePDF } from '../utils/pdfGenerator';
@@ -33,7 +33,7 @@ export const InvoiceDetailModal: React.FC<InvoiceDetailModalProps> = ({
   };
 
   const handleSendWhatsApp = () => {
-    const text = `Cześć ${invoice.client.name}, przesyłam ${invoice.type === 'FAKTURA' ? 'fakturę' : 'ofertę'} nr ${invoice.number} na kwotę ${invoice.totalGross.toFixed(2)} PLN. Prośba o wpłatę BLIK/Przelewem. Dziękuję!`;
+    const text = `Cześć ${invoice.client.name}, przesyłam ${invoice.type === 'FAKTURA' ? 'fakturę' : 'ofertę'} nr ${invoice.number} na kwotę ${invoice.totalGross.toFixed(2)} PLN. Prośba o przelew na konto: ${profile.bankAccount}. Dziękuję!`;
     const encoded = encodeURIComponent(text);
     window.open(`https://wa.me/?text=${encoded}`, '_blank');
   };
@@ -147,16 +147,16 @@ export const InvoiceDetailModal: React.FC<InvoiceDetailModalProps> = ({
             </div>
           </div>
 
-          {/* Quick Pay Display for On-Site Payment */}
-          <div style={{ background: '#f0fdf4', padding: '14px', borderRadius: '14px', border: '1px solid #bbf7d0', textAlign: 'center' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontWeight: 800, color: '#166534', fontSize: '14px' }}>
-              <Smartphone size={18} />
-              <span>Szybka Płatność na Miejscu (BLIK)</span>
+          {/* Bank Transfer Details */}
+          <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '14px', border: '1px solid #e2e8f0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 800, color: '#0f172a', fontSize: '13px' }}>
+              <Building2 size={16} />
+              <span>Dane do przelewu bankowego</span>
             </div>
-            <div style={{ fontSize: '13px', color: '#15803d', marginTop: '4px' }}>
-              Poproś klienta o przelew na telefon BLIK: <b>+48 {profile.blikPhone}</b>
+            <div style={{ fontSize: '13px', color: '#475569', marginTop: '6px' }}>
+              Numer konta: <b>{profile.bankAccount}</b>
             </div>
-            <div style={{ fontSize: '12px', color: '#166534', marginTop: '2px', fontWeight: 600 }}>
+            <div style={{ fontSize: '12px', color: '#64748b', marginTop: '2px' }}>
               Tytuł przelewu: <b>{invoice.number}</b>
             </div>
           </div>
