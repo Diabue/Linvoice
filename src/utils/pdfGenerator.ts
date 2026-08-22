@@ -256,17 +256,30 @@ export const generateInvoicePDF = (invoice: Invoice, seller: UserCompanyProfile)
   );
   doc.text('Wygenerowano automatycznie w aplikacji linvoice — Szybkie Wyceny i Faktury dla Fachowców', 15, 280);
 
-  // Save PDF file with forced download filename & extension across all browsers
-  const pdfBlob = doc.output('blob');
-  const blobUrl = URL.createObjectURL(pdfBlob);
-  const cleanNumber = (invoice.number || 'Dokument').replace(/[^a-zA-Z0-9_-]/g, '_');
-  const filename = `${invoice.type}_${cleanNumber}.pdf`;
+  // 7. SAVE PDF WITH EXPLICIT MIME TYPE & CROSS-BROWSER DOWNLOAD ANCHOR
+  try {
+    const cleanNumber = (invoice.number || 'Dokument').replace(/[^a-zA-Z0-9_-]/g, '_');
+    const filename = `${invoice.type}_${cleanNumber}.pdf`;
 
-  const link = document.createElement('a');
-  link.href = blobUrl;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    // Extract ArrayBuffer and explicitly set MIME type 'application/pdf'
+    const pdfArrayBuffer = doc.output('arraybuffer');
+    const pdfBlob = new Blob([pdfArrayBuffer], { type: 'application/pdf' });
+    const blobUrl = URL.createObjectURL(pdfBlob);
+
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.setAttribute('download', filename);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+      URL.revokeObjectURL(blobUrl);
+    }, 3000);
+  } catch (err) {
+    // Native jsPDF fallback if Blob URL creation fails
+    const cleanNumber = (invoice.number || 'Dokument').replace(/[^a-zA-Z0-9_-]/g, '_');
+    doc.save(`${invoice.type}_${cleanNumber}.pdf`);
+  }
 };
