@@ -256,7 +256,17 @@ export const generateInvoicePDF = (invoice: Invoice, seller: UserCompanyProfile)
   );
   doc.text('Wygenerowano automatycznie w aplikacji linvoice — Szybkie Wyceny i Faktury dla Fachowców', 15, 280);
 
-  // Save PDF file
-  const filename = `${invoice.number.replace(/\//g, '_')}.pdf`;
-  doc.save(filename);
+  // Save PDF file with forced download filename & extension across all browsers
+  const pdfBlob = doc.output('blob');
+  const blobUrl = URL.createObjectURL(pdfBlob);
+  const cleanNumber = (invoice.number || 'Dokument').replace(/[^a-zA-Z0-9_-]/g, '_');
+  const filename = `${invoice.type}_${cleanNumber}.pdf`;
+
+  const link = document.createElement('a');
+  link.href = blobUrl;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
 };
