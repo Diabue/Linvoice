@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { UserCompanyProfile } from '../types';
-import { Save } from 'lucide-react';
+import { Save, Upload, Trash2, Image } from 'lucide-react';
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -19,6 +19,22 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
 
   if (!isOpen) return null;
 
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64Url = event.target?.result as string;
+      setForm({ ...form, logoUrl: base64Url });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveLogo = () => {
+    setForm({ ...form, logoUrl: undefined });
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSaveProfile(form);
@@ -34,6 +50,62 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({
         </div>
 
         <form onSubmit={handleSubmit} className="modal-body">
+          {/* Logo Upload Section */}
+          <div style={{ background: '#f8fafc', padding: '14px', borderRadius: '14px', border: '1px dashed #cbd5e1' }}>
+            <label className="form-label" style={{ display: 'flex', alignItems: 'center', gap: '6px', margin: 0 }}>
+              <Image size={16} color="#0f172a" />
+              <span>Logo Twojej Firmy (wyświetlane na fakturach PDF)</span>
+            </label>
+
+            {form.logoUrl ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '10px' }}>
+                <div style={{ width: '80px', height: '50px', background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '8px', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+                  <img src={form.logoUrl} alt="Logo podgląd" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleRemoveLogo}
+                  style={{ background: '#fef2f2', border: '1px solid #fecaca', color: '#dc2626', padding: '6px 12px', borderRadius: '8px', fontSize: '12px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+                >
+                  <Trash2 size={14} />
+                  <span>Usuń logo</span>
+                </button>
+              </div>
+            ) : (
+              <div style={{ marginTop: '8px' }}>
+                <label
+                  htmlFor="logo-file-input"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '8px 14px',
+                    background: '#ffffff',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '10px',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    color: '#0f172a',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <Upload size={16} />
+                  <span>Wybierz plik graficzny logo (PNG/JPG)</span>
+                </label>
+                <input
+                  id="logo-file-input"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleLogoUpload}
+                  style={{ display: 'none' }}
+                />
+                <div style={{ fontSize: '11px', color: '#64748b', marginTop: '4px' }}>
+                  Zalecany przezroczysty plik PNG lub kwadratowy/prostokątny plik JPG.
+                </div>
+              </div>
+            )}
+          </div>
+
           <div className="form-group">
             <label className="form-label">Nazwa Twojej Firmy / Imię i Nazwisko</label>
             <input
