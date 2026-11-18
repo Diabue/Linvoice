@@ -10,9 +10,13 @@ Dokumenty, klienci i cennik są zapisywane w przeglądarce (`localStorage`). Log
 
 ## Zrzuty ekranu
 
-![Pulpit z historią wycen i faktur](public/screenshots/dashboard.png)
-
-[Wyszukiwanie po NIP](public/screenshots/gus_step1.png) · [Dodawanie pozycji](public/screenshots/services_step2.png) · [Cennik usług](public/screenshots/catalog.png) · [Lista klientów](public/screenshots/clients.png)
+<p align="center">
+  <img src="public/screenshots/dashboard.png" width="240" alt="Pulpit z historią wycen i faktur">
+  <img src="public/screenshots/gus_step1.png" width="240" alt="Wyszukiwanie firmy po NIP">
+  <img src="public/screenshots/services_step2.png" width="240" alt="Dodawanie pozycji do dokumentu">
+  <img src="public/screenshots/catalog.png" width="240" alt="Cennik usług">
+  <img src="public/screenshots/clients.png" width="240" alt="Lista klientów">
+</p>
 
 ## Uruchomienie lokalne
 
