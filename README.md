@@ -1,79 +1,28 @@
-# ⚡ linvoice — Express Mobile Invoicing & Quotes for Tradesmen & Contractors
+# linvoice
 
-![linvoice Banner](public/screenshots/dashboard.png)
+linvoice to aplikacja do przygotowywania wycen i faktur na telefonie. Jest pomyślana dla fachowców, którzy chcą zrobić wycenę jeszcze u klienta, np. po obejrzeniu instalacji albo ustaleniu zakresu remontu.
 
-> **Szybkie faktury i wyceny w 3 krokach prosto z budowy dla hydraulików, elektryków, stolarzy i firm wykończeniowych.**
+Wybierasz klienta, dodajesz pozycje z własnego cennika i sprawdzasz podsumowanie. Gotowy dokument możesz pobrać jako PDF. Z jego podglądu możesz też otworzyć WhatsApp z gotową wiadomością do klienta. W historii sprawdzisz status dokumentu i oznaczysz fakturę jako opłaconą.
 
----
+Aplikacja szuka danych firmy po NIP w białej liście VAT. Jeśli nie znajdzie wpisu, podstawi dane przykładowe. Pola kontaktowe też mogą zawierać dane testowe, więc przed wystawieniem dokumentu warto je sprawdzić.
 
-## 📸 Zrzuty Ekranu Aplikacji (Screenshots)
+Dokumenty, klienci i cennik są zapisywane w przeglądarce (`localStorage`). Logowanie i subskrypcja PRO działają w trybie demonstracyjnym.
 
-<div align="center">
+## Zrzuty ekranu
 
-| 📊 Pulpit & Historia Wycen | ⚡ Zaciąganie z GUS po NIP |
-| :---: | :---: |
-| <img src="public/screenshots/dashboard.png" width="360" alt="Pulpit linvoice" /> | <img src="public/screenshots/gus_step1.png" width="360" alt="GUS NIP Search" /> |
+![Pulpit z historią wycen i faktur](public/screenshots/dashboard.png)
 
-| 🛠️ Kreator Usług na Budowie | 📖 Katalog Usług & Cennik |
-| :---: | :---: |
-| <img src="public/screenshots/services_step2.png" width="360" alt="Kreator Usług" /> | <img src="public/screenshots/catalog.png" width="360" alt="Cennik Usług" /> |
+[Wyszukiwanie po NIP](public/screenshots/gus_step1.png) · [Dodawanie pozycji](public/screenshots/services_step2.png) · [Cennik usług](public/screenshots/catalog.png) · [Lista klientów](public/screenshots/clients.png)
 
-| 👥 Baza Klientów z NIP |
-| :---: |
-| <img src="public/screenshots/clients.png" width="360" alt="Baza Klientów" /> |
+## Uruchomienie lokalne
 
-</div>
-
----
-
-## 🔥 Kluczowe Funkcje (Key Features)
-
-- ⚡ **Wystawianie wyceny/faktury w 30 sekund** — Błyskawiczny 3-krokowy wizard zaprojektowany pod chwyt jedną ręką na telefonie.
-- 🏢 **Automatyczne pobieranie z GUS / Ministerstwa Finansów** — Wpisz 10-cyfrowy NIP klienta, a system w 0.2s uzupełni nazwę, ulicę, miasto, kod pocztowy i e-mail.
-- 🛠️ **Szybki Katalog Usług & Cennik** — Liczniki `+` i `-` umożliwiają szybkie dodawanie gotowych pozycji (np. *Montaż punktu elektrycznego*, *Wymiana syfonu*) bezpośrednio u klienta.
-- 💳 **Wygodne formy płatności** — Rozliczenie przelewem bankowym, gotówką lub kartą z danymi rachunku IBAN na fakturze.
-- 📄 **Generowanie PDF i wysyłka SMS / WhatsApp** — Profesjonalne faktury i wyceny w formacie PDF gotowe do udostępnienia jednym kliknięciem.
-- 🔒 **Subskrypcja PRO z 3-dniowym Trialem** — System darmowych testów, baner z odliczaniem czasu oraz wbudowany Paywall z możliwością płatności i anulowania subskrypcji.
-
----
-
-## 🛠️ Technologie (Tech Stack)
-
-- **Frontend:** React 19 + TypeScript
-- **Bundler / Build:** Vite 8 + OXC
-- **Styling:** Mobile-first Vanilla CSS (Design system inspirowany glassmorphism i dark UI)
-- **Generowanie PDF:** `jspdf`
-- **Efekty & Animacje:** `canvas-confetti`, `lucide-react`
-- **Płatności & Dane:** LocalStorage Storage Manager z hybrydowym polskim API rejestru VAT/GUS
-
----
-
-## 🚀 Jak uruchomić lokalnie (Getting Started)
-
-### Wymagania
-- Node.js `v18+`
-- npm `v9+`
-
-### Klonowanie i instalacja
+Projekt używa Reacta, TypeScriptu i Vite. Wersja Node.js zapisana w `.node-version` to `22.12.0`.
 
 ```bash
-# 1. Klonowanie repozytorium
 git clone https://github.com/Diabue/Linvoice.git
 cd Linvoice
-
-# 2. Instalacja zależności
 npm install
-
-# 3. Uruchomienie serwera deweloperskiego (z obsługą połączeń mobilnych w Wi-Fi)
 npm run dev
 ```
 
-Po uruchomieniu otwórz w przeglądarce:
-- Na komputerze: `http://localhost:5173/`
-- Na telefonie (w tej samej sieci Wi-Fi): `http://192.168.x.x:5173/`
-
----
-
-## 📄 Licencja
-
-Projekt stworzony dla **linvoice** — aplikacja wycen i faktur dla fachowców.
+Na komputerze otwórz `http://localhost:5173/`. Żeby sprawdzić widok na telefonie, połącz go z tą samą siecią Wi-Fi i otwórz adres `Network` wypisany przez Vite w terminalu.
